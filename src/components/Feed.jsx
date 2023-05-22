@@ -1,8 +1,16 @@
-import { useState, useEfect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import { BorderRight } from "@mui/icons-material";
 import {Sidebar, Videos} from "./";
+import { fetchData } from "../utils/fetchData";
+
 const Feed = () => {
+
+  const [category,setCategory] = useState("New");
+  const [page, setPage]=useState(0);
+  const [posts, setPosts]=useState([]);
+  useEffect(()=>{
+     fetchData(page).then((data)=>{setPosts(data)})
+  }, [page]);
   return (
     <Stack 
       sx={{flexDirection:{sx:'column', md:'row'}}}
@@ -10,7 +18,7 @@ const Feed = () => {
       <Box
         sx={{height: {sx: 'auto', md: '92vh'}, borderRight : '1px solid #3d3d3d', px: {sx :0, md:2}}}
       >
-        <Sidebar />
+        <Sidebar selectedCategory={category} setCategory={setCategory}/>
         <Typography className="copyright" variant="body2" sx={{ mt: 1.5, color: '#fff'}}>
           Copyright 2023 Arihant Agnihotri
         </Typography>
@@ -20,10 +28,10 @@ const Feed = () => {
           <Typography variant='h4' fontWeight="bold" md={2}
           sx = {{color: 'white'}}
           >
-          New
-          <span style={{color : "#154E91"}}> Videos </span>
+          {category}
+          <span style={{color : "red"}}> Videos </span>
         </Typography>
-        <Videos />
+        <Videos videos={posts}/>
       </Box>
       
 

@@ -1,8 +1,12 @@
-import { Stack } from "@mui/material";
+
+import { useState, useEffect } from "react";
+import { Divider, Stack } from "@mui/material";
 import { categories } from "../utils/constants";
-const selectedCategory = "New"
-const Sidebar = () => {
-  return (
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+const Sidebar = ({selectedCategory, setCategory}) => {
+
+    return (
+    
     <Stack
         direction="row"
         sx={{ overflowY : 'auto', 
@@ -14,11 +18,12 @@ const Sidebar = () => {
         categories.map((category)=> (
             <button
                 className="category-btn"
-                style={{background: category.name === selectedCategory && '#154E91',
+                onClick={()=>setCategory(category.name)}
+                style={{background: category.name === selectedCategory && 'red',
                     color : 'white'}}
             >
                 <span  
-                    style = {{color : category.name === selectedCategory? 'white': '#154E91', 
+                    style = {{color : category.name === selectedCategory? 'white': 'red', 
                             marginRight: '15px'
                             }}
                 >
@@ -30,6 +35,7 @@ const Sidebar = () => {
             </button>
         ))
     }
+    <Divider />
 
     </Stack>
   )

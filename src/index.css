@@ -3,11 +3,15 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  color: white;
 }
-
+button{
+  color : white !important
+}
 a {
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 ::-webkit-scrollbar {
@@ -26,7 +30,7 @@ a {
 }
 
 .category-btn:hover {
-  background-color: #154E91 !important;
+  background-color: red !important;
   color: white !important;
 }
 

@@ -11,7 +11,7 @@ const App = () => {
         <Route path="/" exact element={<Feed />}/>
         <Route path='/video/:id' element={<VideoDetail />} />
         <Route path='/search/:searchTerm' element={<SearchFeed />} />
-        <Route path='/api' element={<ApiTest />} />
+        {/* <Route path='/api' element={<ApiTest />} /> */}
       </Routes>
       </Box>
     </BrowserRouter>
