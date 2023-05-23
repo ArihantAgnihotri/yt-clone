@@ -41,6 +41,7 @@ a {
 .react-player {
   height: 77vh !important;
   width: 100% !important;
+  /* padding-top: 50px; */
 }
 
 .search-bar{
@@ -64,6 +65,14 @@ a {
   margin: 10px 0px;
   border-radius: 20px;
   transition: all 0.3s ease;
+}
+
+
+.profilePic{
+  width : 30px;
+  height : 30px;
+  border-radius: 20px;
+  position: absolute;
 }
 
 @media screen and (max-width: 900px) {
@@ -90,3 +99,4 @@ a {
     width:200px;
   }
 }
+

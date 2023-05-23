@@ -16,22 +16,18 @@ const Feed = () => {
       sx={{flexDirection:{sx:'column', md:'row'}}}
     >
       <Box
-        sx={{height: {sx: 'auto', md: '92vh'}, borderRight : '1px solid #3d3d3d', px: {sx :0, md:2}}}
+        sx={{height: {sx: 'auto', md: '92vh'}, borderRight : '1px solid #3d3d3d', px: {xs:0, md:2.5}}}
       >
         <Sidebar selectedCategory={category} setCategory={setCategory}/>
-        <Typography className="copyright" variant="body2" sx={{ mt: 1.5, color: '#fff'}}>
-          Copyright 2023 Arihant Agnihotri
-        </Typography>
-
       </Box>
-      <Box p={2} sx={{overflowY : 'Auto', height: '90vh', flex: 2}}>
+      <Box p={2} sx={{overflowY : 'Auto', height: '90vh', flex: 2, paddingLeft :{xs: '20%', md:2}}}>
           <Typography variant='h4' fontWeight="bold" md={2}
           sx = {{color: 'white'}}
           >
           {category}
           <span style={{color : "red"}}> Videos </span>
         </Typography>
-        <Videos videos={posts}/>
+        <Videos posts={posts}/>
       </Box>
       
 

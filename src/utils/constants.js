@@ -34,8 +34,8 @@ export const categories = [
 ];
 
 export const demoThumbnailUrl = 'https://kappa.lol/QZBDo';
-export const demoChannelUrl = '/channel/UCmXmlB4-HJytD7wek0Uo97A';
-export const demoVideoUrl = '/video/GDa8kZLNhJ4';
+export const demoChannelUrl = 'https://www.youtube.com/channel/UCW7vZtVTaT8oK8UGeGfCRnQ';
+export const demoVideoUrl = '0a91160b6b2a_1683380517268.mp4';
 export const demoChannelTitle = 'No Channel Name Given';
 export const demoVideoTitle = 'Video';
 export const demoProfilePicture = 'http://dergipark.org.tr/assets/app/images/buddy_sample.png'
