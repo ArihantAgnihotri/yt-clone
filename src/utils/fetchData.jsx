@@ -9,7 +9,7 @@ const BASE_URL = "https://internship-service.onrender.com/videos?"
         console.log(data);
         const posts = data.data.posts;
         console.log(posts);
-        return posts
+        return posts;
       } catch (error) {
         console.error('Error fetching data:', error);
       }

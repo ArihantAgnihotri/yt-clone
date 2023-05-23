@@ -11,6 +11,11 @@ const Feed = () => {
   useEffect(()=>{
      fetchData(page).then((data)=>{setPosts(data)})
   }, [page]);
+  let props ={
+    pageNumber  : page,
+    postsSent : posts
+  }
+  console.log(props);
   return (
     <Stack 
       sx={{flexDirection:{sx:'column', md:'row'}}}
@@ -28,7 +33,7 @@ const Feed = () => {
           {category}
           <span style={{color : "red"}}> Videos </span>
         </Typography>
-        <Videos posts={posts}/>
+        <Videos {...props}/>
         <Box sx={{ height : '15vh', display :'flex', 
                 justifyContent:'center', alignItems:'center', color: 'white'}}>
                 <Pagination variant='outlined' color='secondary'  count={10}
