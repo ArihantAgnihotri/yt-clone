@@ -8,11 +8,7 @@ import { fetchData } from '../utils/fetchData';
 const VideoDetail = () => {
   const[videoDetail, setVideoDetail]=useState(null);
   const id = useParams();
-  const postId = id.id.slice(0,36);
-  const videoId = id.id.slice(36);
-  console.log(postId);
-  console.log(videoId);
-  const url = `https://cdn.gro.care/${videoId}`;
+  const url = `https://cdn.gro.care/${id.id}`;
   
   useEffect(()=>{
     

@@ -6,7 +6,7 @@ const Videos = ({ posts }) => {
   console.log(posts);
   return (
     
-    <Stack direction='row' flexWrap='wrap' justifyContent='start' gap={2}>
+    <Stack direction='row' flexWrap='wrap' justifyContent='center' gap={2}>
       {posts?.map((item, idx)=>(
         <Box key={idx}>
           {item && <VideoCard video={item} />}

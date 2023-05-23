@@ -8,7 +8,7 @@ const VideoCard = ({video}) => {
     console.log(video);
   return (
     <Card sx={{width : {md:'320px', sm: '100%'}, borderRadius:'10px'}}>
-        <Link to={video.creator.id? `/video/${video.postId + video.submission.mediaUrl.slice(21,60)}`: demoVideoUrl}>
+        <Link to={video.creator.id? `/video/${video.submission.mediaUrl.slice(21)}`: demoVideoUrl}>
             <CardMedia 
                 image= {video?.submission?.thumbnail}
                 alt={video.creator.handle}
@@ -18,7 +18,7 @@ const VideoCard = ({video}) => {
         </Link>
         
         <CardContent sx={{backgroundColor : '#1e1e1e', height: '160px'}}>
-        <Link to={video.creator.id? `/video/${video.submission.mediaUrl.slice(21,100)}`: demoVideoUrl}>
+        <Link to={video.creator.id? `/video/${video.submission.mediaUrl.slice(21)}`: demoVideoUrl}>
             <Typography sx={{paddingBottom: '20px'}} variant='subtitle1' fontWeight='bold' color='white'>
               {video?.submission?.title.slice(0,60) || demoVideoTitle.slice(0,60)}  
             </Typography>
@@ -39,5 +39,4 @@ const VideoCard = ({video}) => {
     </Card>
   )
 }
-
 export default VideoCard

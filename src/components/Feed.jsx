@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Pagination, Stack, Typography } from "@mui/material";
 import {Sidebar, Videos} from "./";
 import { fetchData } from "../utils/fetchData";
 
@@ -20,7 +20,8 @@ const Feed = () => {
       >
         <Sidebar selectedCategory={category} setCategory={setCategory}/>
       </Box>
-      <Box p={2} sx={{overflowY : 'Auto', height: '90vh', flex: 2, paddingLeft :{xs: '20%', md:2}}}>
+      <Box p={2} sx={{overflowY : 'Auto', height: '90vh', flex: 2, justifyContent:'center', 
+                width: {xs: '100%', s:'100%', md: '40%'}}}>
           <Typography variant='h4' fontWeight="bold" md={2}
           sx = {{color: 'white'}}
           >
@@ -28,7 +29,15 @@ const Feed = () => {
           <span style={{color : "red"}}> Videos </span>
         </Typography>
         <Videos posts={posts}/>
+        <Box sx={{ height : '15vh', display :'flex', 
+                justifyContent:'center', alignItems:'center', color: 'white'}}>
+                <Pagination variant='outlined' color='secondary'  count={10}
+                  showFirstButton={true} showLastButton={true} defaultPage={page}
+                    onChange={(event,value)=> setPage(value-1)}
+                  />
+        </Box>
       </Box>
+      
       
 
     </Stack>
