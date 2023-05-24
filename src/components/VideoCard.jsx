@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { Typography, Card, CardContent, CardMedia, Tooltip,Box } from '@mui/material';
-import { CheckCircle } from '@mui/icons-material';
+import { AspectRatio, CheckCircle } from '@mui/icons-material';
 import {VideoDetails} from './';
 import { demoThumbnailUrl,demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChannelTitle, demoProfilePicture } from '../utils/constants';
 const VideoCard = ({video}) => {
@@ -9,10 +9,11 @@ const VideoCard = ({video}) => {
   return (
     <Card sx={{width : {md:'320px', sm: '100%'}, borderRadius:'10px'}}>
         <Link to={video.creator.id? `/video/${video.submission.mediaUrl.slice(21)}`: demoVideoUrl}>
-            <CardMedia 
+            <CardMedia
+                component = 'img' 
                 image= {video?.submission?.thumbnail}
                 alt={video.creator.handle}
-                sx={{width : 300, height: 150}}
+                sx={{width : {md:'100%', xs: 350}, height: {md: 'auto', xs:'100%' }, aspectRatio : {md:'auto', xs: '4/3'}}}
                 
             />
         </Link>
