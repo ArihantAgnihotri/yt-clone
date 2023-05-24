@@ -7,7 +7,7 @@ import { demoThumbnailUrl,demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChan
 const VideoCard = ({video}) => {
     console.log(video);
   return (
-    <Card sx={{width : {md:'320px', sm: '100%'}, borderRadius:'10px'}}>
+    <Card sx={{width : {md:'320px', sm: '100%'}, borderRadius:'40px'}}>
         <Link to={video.creator.id? `/video/${video.submission.mediaUrl.slice(21)}`: demoVideoUrl}>
             <CardMedia
                 component = 'img' 
