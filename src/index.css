@@ -8,6 +8,11 @@ body {
 }
 button{
   color : white !important;
+  
+}
+button :hover{
+  color : rgb(181, 0, 0) !important;
+ 
 }
 a {
   text-decoration: none;
@@ -73,6 +78,13 @@ a {
   height : 30px;
   border-radius: 20px;
   position: absolute;
+}
+
+.hoverGlow :hover{
+  box-shadow: 0 5px 15px #9a1616;
+}
+.noGlow :hover{
+  box-shadow: none !important;
 }
 
 @media screen and (max-width: 900px) {
