@@ -31,25 +31,29 @@ const Feed = () => {
         <Sidebar selectedCategory={category} setCategory={setCategory} />
       </Box>
       <Box
-        p={2}
         sx={{
           overflowY: "Auto",
           height: "90vh",
           flex: 2,
-          justifyContent: "center",
-          width: { xs: "100%", s: "100%", md: "40%" },
+          width: "100%",
         }}
       >
         <Typography
           variant="h4"
           fontWeight="bold"
-          md={2}
-          sx={{ color: "white" }}
+          sx={{
+            color: "white",
+            pt: { md: "0px", xs: "10px" },
+            pl: { md: "50px", xs: "10px" },
+            pb: "15px",
+          }}
         >
           {category}
           <span style={{ color: "red" }}> Videos </span>
         </Typography>
-        <Videos {...props} />
+        <Box sx={{ paddingLeft: { md: "50px", xs: "0px" } }}>
+          <Videos {...props} />
+        </Box>
         <Box
           sx={{
             height: "15vh",
@@ -60,12 +64,21 @@ const Feed = () => {
           }}
         >
           <Pagination
-            variant="outlined"
-            color="secondary"
             count={10}
             showFirstButton={true}
             showLastButton={true}
             defaultPage={page}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                color: "white", // Set pagination item color to white
+              },
+              "& .MuiPaginationItem-root:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.1)", // Set background color to white when hovering
+              },
+              "& .MuiPaginationItem-root.Mui-selected": {
+                backgroundColor: "rgba(255, 255, 255, 0.2)", // Set background color to white
+              },
+            }}
             onChange={(event, value) => setPage(value - 1)}
           />
         </Box>

@@ -7,8 +7,8 @@ const Videos = ({ pageNumber, postsSent, direction, aspectRatio }) => {
     <Stack
       direction={direction}
       flexWrap="wrap"
-      justifyContent="center"
-      gap={2}
+      justifyContent={{ md: "left", xs: "center" }}
+      gap={3}
     >
       {postsSent?.map((item, idx) => (
         <Box key={idx}>

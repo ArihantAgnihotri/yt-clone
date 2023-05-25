@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import ReactPlayer from "react-player";
-import { Typography, Box, Stack } from "@mui/material";
+import { useParams } from "react-router-dom";
+import {
+  Typography,
+  Box,
+  Stack,
+  Button,
+  Tooltip,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import { CheckCircle, ThumbUp, Comment } from "@mui/icons-material";
-import { Video, Videos } from "./";
-import { fetchData } from "../utils/fetchData";
+import { Sidebar, Videos } from "./";
 import axios from "axios";
 const VideoDetail = () => {
-  const [videoDetail, setVideoDetail] = useState(null);
   const id = useParams();
   const BASE_URL = "https://internship-service.onrender.com/videos?";
   const postId = id.postId;
   const page = id.page;
-  const url = "https://cdn.gro.care/";
   let [posts, setPosts] = useState(null);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
   useEffect(() => {
     const fetcher = async () => {
       try {
@@ -28,33 +36,52 @@ const VideoDetail = () => {
     fetcher();
   }, [page]);
 
-  const selectedPost = posts?.find((post) => post.postId === postId);
+  const truncateDescription = (description, maxLength) => {
+    if (description?.length <= maxLength) {
+      return description;
+    }
+    return description?.substring(0, maxLength) + "...";
+  };
 
-  console.log(`Page: ${page} PostId: ${postId}`);
-  console.log(posts);
-  console.log("Selected Post:", selectedPost);
-  console.log("Selected Post url:", selectedPost?.submission?.mediaUrl);
+  const [showLikeError, setShowLikeError] = useState(false);
+  const handleLikeButtonClick = () => {
+    if (!selectedPost?.reaction.voted) {
+      setShowLikeError(true);
+    } else {
+      // Handle like button click action
+    }
+  };
+
+  const [showLCommentError, setShowCommentError] = useState(false);
+  const handleCommentButtonClick = () => {
+    if (!selectedPost?.comment.commentingAllowed) {
+      setShowCommentError(true);
+    } else {
+      // Handle Comment button click action
+    }
+  };
+
+  const selectedPost = posts?.find((post) => post.postId === postId);
   return (
-    <Box minHeight="95vh">
+    <Box minHeight="100vh">
       <Stack direction={{ xs: "column", md: "row" }}>
-        <Box flex={1} sx={{ overflowY: "auto", maxHeight: "100vh" }}>
+        <Box flex={1} sx={{ maxWidth: { md: "200px" }, overflowY: "auto" }}>
+          <Sidebar />
+        </Box>
+
+        <Box
+          flex={1}
+          sx={{
+            overflowY: "auto",
+          }}
+        >
           <Box
             sx={{
               width: "100%",
               position: "sticky",
-              top: "86px",
+              top: "10px",
             }}
           >
-            <video className="react-player" controls>
-              <source
-                src={selectedPost?.submission?.mediaUrl}
-                type="video/mp4"
-              />
-              Sorry, your browser does not support this video
-            </video>
-            <Typography variant="h5" fontWeight="bold" p={2}>
-              {selectedPost?.submission.title}
-            </Typography>
             <Stack
               direction="row"
               justifyContent="space-between"
@@ -62,51 +89,214 @@ const VideoDetail = () => {
               py={1}
               px={2}
             >
-              <Typography variant={{ sm: "subtitle1", md: "h6" }}>
-                {selectedPost?.creator.name || "No channel name given"}
-                <CheckCircle
-                  sx={{ fontSize: "12px", color: "grey", ml: "5px" }}
-                />
-              </Typography>
-              <Stack direction="column" gap="20px" alignItems="center">
-                <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                  <ThumbUp /> {selectedPost?.reaction.count}
+              <iframe
+                src={selectedPost?.submission?.mediaUrl}
+                title="Video"
+                style={{
+                  height: "80vh",
+                  border: "none",
+                  paddingBottom: "0px",
+                  margin: "auto",
+                }}
+              ></iframe>
+            </Stack>
+
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              px={2}
+              pt={2}
+              sx={{ marginTop: { md: "-55px", xs: "-10px" } }}
+            >
+              {selectedPost?.submission.title}
+            </Typography>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ color: "#fff" }}
+              py={1}
+              px={2}
+            >
+              <Tooltip title={`@${selectedPost?.creator.handle}`}>
+                <Typography
+                  sx={{ display: "flex", alignItems: "center" }}
+                  variant="body1"
+                >
+                  {selectedPost?.creator.name || "No channel name"}
+                  <CheckCircle
+                    sx={{ fontSize: "18px", color: "grey", ml: "5px" }}
+                  />
                 </Typography>
-                <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                  <Comment /> {selectedPost?.comment.count}
-                </Typography>
+              </Tooltip>
+
+              <Stack direction="row" gap="10px" alignItems="center">
+                <Box
+                  sx={{
+                    padding: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button
+                    startIcon={<ThumbUp />}
+                    variant="text"
+                    sx={{
+                      color: "#fff",
+                      fontSize: "1.2rem",
+                      padding: 0,
+                      opacity: selectedPost?.reaction.voted ? 1 : 0.5,
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                        boxShadow: "0 0 10px rgba(255, 255, 255, 0.2)",
+                      },
+                      borderRadius: "30px",
+                    }}
+                    onClick={handleLikeButtonClick}
+                  >
+                    {selectedPost?.reaction.count}
+                  </Button>
+                </Box>
+                <Snackbar
+                  open={showLikeError}
+                  autoHideDuration={2000}
+                  onClose={() => setShowLikeError(false)}
+                  sx={{
+                    background: "rgba(20, 20, 20, 0.5)",
+                    borderRadius: "20px",
+                  }}
+                >
+                  <Alert
+                    severity="error"
+                    onClose={() => setShowLikeError(false)}
+                    sx={{
+                      background: "rgba(20, 20, 20, 0.5)",
+                      "& .MuiAlert-message": {
+                        color: "#fff", // Set the text color to white
+                      },
+                      borderRadius: "20px",
+                    }}
+                  >
+                    This post is not a voted post.
+                  </Alert>
+                </Snackbar>
+
+                <Box
+                  sx={{
+                    padding: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button
+                    startIcon={<Comment />}
+                    variant="text"
+                    sx={{
+                      color: "#fff",
+                      fontSize: "1.2rem",
+                      padding: 0,
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                        boxShadow: "0 0 10px rgba(255, 255, 255, 0.2)",
+                      },
+                      opacity: selectedPost?.comment.commentingAllowed
+                        ? 1
+                        : 0.5,
+                      borderRadius: "30px",
+                    }}
+                    onClick={handleCommentButtonClick}
+                  >
+                    {selectedPost?.comment.count}
+                  </Button>
+                </Box>
+
+                <Snackbar
+                  open={showLCommentError}
+                  autoHideDuration={4000}
+                  onClose={() => setShowCommentError(false)}
+                  sx={{
+                    background: "rgba(20, 20, 20, 0.5)",
+                    borderRadius: "20px",
+                  }}
+                >
+                  <Alert
+                    severity="error"
+                    onClose={() => setShowCommentError(false)}
+                    sx={{
+                      background: "rgba(20, 20, 20, 0.5)",
+                      "& .MuiAlert-message": {
+                        color: "#fff", // Set the text color to white
+                      },
+                      borderRadius: "20px",
+                    }}
+                  >
+                    This post has comments disabled.
+                  </Alert>
+                </Snackbar>
               </Stack>
             </Stack>
             <Box
               sx={{
-                backgroundColor: "#1E1E1E",
-                justifyContent: "center",
-                justifyItems: "center",
-                width: "100%",
-                textAlign: "center",
+                backgroundColor: "rgba(68, 68, 68, 0.3)",
+                padding: "20px",
                 borderRadius: "20px",
+                marginBottom: { xs: "50px", md: "0px" },
+                mx: { xs: "20px", md: "0px" },
               }}
             >
               <Typography
                 fontWeight="bold"
                 variant="h6"
-                sx={{ opacity: 0.7, padding: "" }}
+                sx={{ color: "#fff", marginBottom: "10px" }}
               >
                 Description:
               </Typography>
-              <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                {selectedPost?.submission?.description}
+              <Typography variant="body1" sx={{ color: "#fff", opacity: 0.7 }}>
+                {showFullDescription
+                  ? selectedPost?.submission?.description
+                  : truncateDescription(
+                      selectedPost?.submission?.description,
+                      80
+                    )}
               </Typography>
+              {showFullDescription ? (
+                <Button
+                  onClick={toggleDescription}
+                  variant="text"
+                  sx={{ color: "#fff", fontSize: "0.9rem", marginTop: "10px" }}
+                >
+                  Show Less
+                </Button>
+              ) : (
+                <Button
+                  onClick={toggleDescription}
+                  variant="text"
+                  sx={{ color: "#fff", fontSize: "0.9rem", marginTop: "10px" }}
+                >
+                  Show More
+                </Button>
+              )}
             </Box>
           </Box>
         </Box>
         <Box
-          px={2}
-          py={{ md: 1, xs: 5 }}
-          justifyContent="center"
-          alignItems="center"
-          sx={{ overflowY: "auto", maxHeight: "100vh" }}
+          px={10}
+          pb={{ md: 40, xs: 10 }}
+          sx={{ mx: "auto", overflowY: "auto", maxHeight: "100vh" }}
         >
+          <Typography
+            fontWeight="bold"
+            sx={{
+              padding: "10px",
+              paddingLeft: "0px",
+              marginBottom: "10px",
+              marginTop: "0px",
+              fontSize: "1.7rem",
+            }}
+          >
+            More Videos
+          </Typography>
+
           <Videos
             pageNumber={page}
             postsSent={posts}
