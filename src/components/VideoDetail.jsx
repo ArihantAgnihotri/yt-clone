@@ -87,7 +87,11 @@ const VideoDetail = () => {
                 borderRadius: "20px",
               }}
             >
-              <Typography fontWeight="bold" variant="h6" sx={{ opacity: 0.7 }}>
+              <Typography
+                fontWeight="bold"
+                variant="h6"
+                sx={{ opacity: 0.7, padding: "" }}
+              >
                 Description:
               </Typography>
               <Typography variant="body1" sx={{ opacity: 0.7 }}>
