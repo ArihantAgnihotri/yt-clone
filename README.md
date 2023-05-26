@@ -18,7 +18,7 @@ The application frontend is built using modern web technologies, including HTML,
 
 ## Getting Started
 
-DO checkout the website : `link`
+DO checkout the website : `https://arihant-yt-clone.vercel.app/`
 
 To co-develop the YouTube Clone App, follow these steps:
 
