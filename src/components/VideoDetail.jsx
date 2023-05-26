@@ -295,6 +295,7 @@ const VideoDetail = () => {
           </Box>
         </Box>
         <Box
+          px={{md:10, xs:0}}
           pb={{ md: 40, xs: 10 }}
           sx={{ mx: "auto", overflowY: "auto", maxHeight: "100vh" }}
         >
