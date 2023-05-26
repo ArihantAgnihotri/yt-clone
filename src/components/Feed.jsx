@@ -77,6 +77,17 @@ const Feed = () => {
               "& .MuiPaginationItem-root.Mui-selected": {
                 backgroundColor: "rgba(255, 255, 255, 0.2)", // Set background color to white
               },
+                "& .MuiPagination-ul": {
+                justifyContent: "center",
+                "@media (max-width: 600px)": {
+                  flexWrap: "wrap",
+                },
+              },
+              "& .MuiPaginationItem-root.MuiPaginationItem-ellipsis": {
+                "@media (max-width: 600px)": {
+                  display: "none",
+                },
+              },
             }}
             onChange={(event, value) => setPage(value - 1)}
           />
