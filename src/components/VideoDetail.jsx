@@ -63,9 +63,22 @@ const VideoDetail = () => {
 
   const selectedPost = posts?.find((post) => post.postId === postId);
   return (
-    <Box minHeight="100vh">
+    <Box
+      flex={1}
+      sx={{
+        overflowY: "auto",
+        pl: { md: "5rem", xs: 0 }, // Adjusted padding for smaller screens
+        flexGrow: 1, // Added to occupy remaining space
+      }}
+    >
       <Stack direction={{ xs: "column", md: "row" }}>
-        <Box flex={1} sx={{ maxWidth: { md: "200px" }, overflowY: "auto" }}>
+        <Box
+          sx={{
+            height: { sx: "auto", md: "100%" },
+            borderRight: "1px solid #3d3d3d",
+            px: { xs: 0, md: 2.5 },
+          }}
+        >
           <Sidebar />
         </Box>
 
@@ -73,6 +86,7 @@ const VideoDetail = () => {
           flex={1}
           sx={{
             overflowY: "auto",
+            pl: { md: "5rem" },
           }}
         >
           <Box
@@ -92,6 +106,7 @@ const VideoDetail = () => {
               <iframe
                 src={selectedPost?.submission?.mediaUrl}
                 title="Video"
+                allow="fullscreen"
                 style={{
                   height: "80vh",
                   border: "none",
@@ -225,7 +240,7 @@ const VideoDetail = () => {
                     sx={{
                       background: "rgba(20, 20, 20, 0.5)",
                       "& .MuiAlert-message": {
-                        color: "#fff", // Set the text color to white
+                        color: "white",
                       },
                       borderRadius: "20px",
                     }}
@@ -288,21 +303,15 @@ const VideoDetail = () => {
             fontWeight="bold"
             sx={{
               padding: "10px",
-              paddingLeft: "0px",
+
               marginBottom: "10px",
-              marginTop: "0px",
               fontSize: "1.7rem",
             }}
           >
             More Videos
           </Typography>
 
-          <Videos
-            pageNumber={page}
-            postsSent={posts}
-            direction="column"
-            aspectRatio="16/9"
-          />
+          <Videos pageNumber={page} postsSent={posts} />
         </Box>
       </Stack>
     </Box>

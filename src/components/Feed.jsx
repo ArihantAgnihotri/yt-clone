@@ -18,12 +18,11 @@ const Feed = () => {
     direction: "row",
     aspectRatio: "auto",
   };
-  console.log(props);
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box
         sx={{
-          height: { sx: "auto", md: "92vh" },
+          height: { sx: "auto", md: "91vh" },
           borderRight: "1px solid #3d3d3d",
           px: { xs: 0, md: 2.5 },
         }}
@@ -56,7 +55,7 @@ const Feed = () => {
         </Box>
         <Box
           sx={{
-            height: "15vh",
+            mt: "20px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

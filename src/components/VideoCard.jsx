@@ -19,7 +19,6 @@ import {
   demoProfilePicture,
 } from "../utils/constants";
 const VideoCard = ({ video, page }) => {
-  console.log(video);
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="hoverGlow">
@@ -27,7 +26,7 @@ const VideoCard = ({ video, page }) => {
         sx={{
           width: { md: "220px", sm: "100%" },
           backgroundColor: "black",
-          borderRadius: "10px",
+          borderRadius: "3px",
           overflow: "hidden",
           position: "relative",
           opacity: isHovered ? 1 : 0.6,
@@ -50,8 +49,7 @@ const VideoCard = ({ video, page }) => {
                 width: { md: "100%", xs: "300px" },
                 height: { md: "auto", xs: "100%" },
                 aspectRatio: { md: "16/20", xs: "4/3" },
-                borderTopLeftRadius: "10px",
-                borderTopRightRadius: "10px",
+                borderRadius: "3px",
                 position: "relative",
                 zIndex: 1,
               }}

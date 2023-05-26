@@ -1,16 +1,20 @@
-import { Stack } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { logo } from "../utils/constants";
 import SearchBar from "./SearchBar";
 const Navbar = () => {
   return (
-    <Stack
-      direction="row"
+    <Box
       alignItems="center"
       pl={1}
       pr={1}
-      pb={0}
-      sx={{ background: "#000", top: 0, justifyContent: "space-between" }}
+      sx={{
+        background: "#000",
+        top: 0,
+        justifyContent: "space-between",
+        display: "flex",
+        flexDirection: "row",
+      }}
     >
       <Link to="/" style={{ display: "flex", alignItems: "center" }}>
         <img src={logo} alt="Logo" height={55} />
@@ -26,7 +30,7 @@ const Navbar = () => {
         </span>
       </Link>
       <SearchBar />
-    </Stack>
+    </Box>
   );
 };
 
